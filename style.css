@@ -31,9 +31,7 @@ body {
   /* background-color: rgb(255, 0, 0); */
 }
 
-.navbar{
-  /* width: 100%; */
-}
+
 
 .banner {
   /* width: 100%; */
@@ -126,11 +124,15 @@ body {
 
 /* //////////////////導航欄/////////////////////// */
 
+.navbar{
+  /* width: 100%; */
+}
+
 .nav {
+  position: sticky;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   z-index: 1000;
   bottom: 0;
   left: 0;
@@ -139,7 +141,6 @@ body {
   height: 7vh;
   background-color: #4a4a4a;
   /* width: 100%; */
-
 }
 .nav ul {
   list-style: none;
