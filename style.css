@@ -1,12 +1,11 @@
+/* ///////////////////////////全域設定///////////////////////////////// */
 html{
 margin: 0;
 padding: 0;
-/* font-family: sans-serif; */
+font-family: sans-serif;
 box-sizing: border-box;
 font-size: 2vw;
 }
-
-
 
 @font-face {
   font-family: "Cubic_11";
@@ -24,23 +23,21 @@ body {
   font-size: 1rem;
 }
 
+
 /* //////////////////////.section0/////////////////////// */
 .section0{
   height:  100vh; 
   width: 100%;
-  /* background-color: rgb(255, 0, 0); */
 }
 
 
 
 .banner {
-  /* width: 100%; */
-  height: 50vh;
+   height: 50vh;
   text-align: center;
   line-height: 220px;
-  /* overflow: hidden; */
-  position: relative;
-  /* z-index: 2; */
+   position: relative;
+  
   transform-style: preserve-3d;
 
 }
@@ -54,17 +51,13 @@ body {
   transform: perspective(1000px) rotateX(-10deg);
   animation: autoRun 20s linear infinite;
 }
+
 .banner-img {
   position: absolute;
   width: 70vh;
   top: 10%;
   left: 50%;
   transform:translateX(-50%)
-
-  /* z-index: 1; */
-  /* left: -150px; */
-  /* transform-style: preserve-3d; */
-  /* animation: counterAutoRun 20s linear infinite; */
 }
 
 
@@ -76,14 +69,7 @@ body {
     transform: perspective(1000px)  rotateY(360deg);
   }
 }
-@keyframes counterAutoRun {
-  from {
-    transform: perspective(1000px) rotateY(0deg);
-  }
-  to {
-    transform: perspective(1000px) rotateY(-360deg);
-  }
-}
+
 
 .banner .slider .item {
   height: 200px;
@@ -122,25 +108,27 @@ body {
   display: flex;
 }
 
+/* ///////////波浪容器設定///// ///*/
+.wave {
+  width: 100%;
+  height: 100px;
+  background-color: gray;
+  /* 注意：部分瀏覽器可能需要前綴 */
+  -webkit-clip-path: path("M 0% 20% Q 16.67% 6.67%, 33.33% 20% Q 50% 13.33%, 66.67% 20% Q 83.33% 16.67%, 100% 20% L 100% 100% L 0% 100% Z");
+  clip-path: path("M 0% 20% Q 16.67% 6.67%, 33.33% 20% Q 50% 13.33%, 66.67% 20% Q 83.33% 16.67%, 100% 20% L 100% 100% L 0% 100% Z");
+}
 /* //////////////////導航欄/////////////////////// */
 
-.navbar{
-  /* width: 100%; */
-}
 
 .nav {
   position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #4a4a4a;
+  height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-size: 20px;
-  height: 7vh;
-  background-color: #4a4a4a;
-  /* width: 100%; */
 }
 .nav ul {
   list-style: none;
@@ -166,50 +154,66 @@ body {
   border-radius: 5px;
 }
 
-/* //////////////////////section1////////////////// */
-.section1{
-display: flex;
-height: 100vh;
-position: relative;
-top: 7vh;
+/* //////////////////////section1: Gutcha 區塊///////////////// */ 
+
+.section1 {
+  display: grid;
+  height: 100vh; /* 占滿 70% 視窗高度 */
+  grid-template-columns:2FR 7FR 3FR  2FR
 }
 
-.gutcha{
-  width: 100px;
-  height: 100px;
-  
+.gutcha:nth-of-type(1) {
+
 }
 
+.gutcha:nth-of-type(2) {
 
+}
+
+.gutcha img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Section: 卡片區塊 */
+.section2 {
+  margin-top: 20px;
+  padding: 0 20px;
+}
 
 /* /////////////////////////////card/////////////////////////// */
 .container {
   display: flex;
   justify-content: space-around;
-  width: 100%;
-  /* margin: auto; */
-  
+  align-items: flex-start;
 }
+
 .card {
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 50vh;
-  height: 70VH;
+  height: 70vh;
   text-align: center;
   padding: 20px;
+  flex: 1;
+  margin: 0 10px;
 }
+
 .card img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
 }
+
 .card h2 {
   margin: 10px 0;
   font-size: 1.5rem;
 }
+
 .card p {
   color: #555;
   font-size: 1rem;
