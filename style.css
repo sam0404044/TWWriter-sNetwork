@@ -109,13 +109,74 @@ body {
 }
 
 /* ///////////波浪容器設定///// ///*/
-.wave {
+/* 整個海浪容器 */
+.wave-container {
+  position: absolute;
   width: 100%;
-  height: 100px;
+  height: 150px;
+  overflow: hidden;
+  bottom: 0;
+}
+
+/* 單個海浪層 */
+.wave {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  top: 0;
+  left: 0;
   background-color: gray;
-  /* 注意：部分瀏覽器可能需要前綴 */
-  -webkit-clip-path: path("M 0% 20% Q 16.67% 6.67%, 33.33% 20% Q 50% 13.33%, 66.67% 20% Q 83.33% 16.67%, 100% 20% L 100% 100% L 0% 100% Z");
-  clip-path: path("M 0% 20% Q 16.67% 6.67%, 33.33% 20% Q 50% 13.33%, 66.67% 20% Q 83.33% 16.67%, 100% 20% L 100% 100% L 0% 100% Z");
+  opacity: 0.5;
+  animation: wave-move 6s infinite ease-in-out;
+  clip-path: ellipse(60% 100% at 50% 100%); /* 修正左邊凸出 */
+}
+
+/* 底層海浪 - 最深顏色 */
+.wave-bottom {
+  background-color: #131313;
+  height: 120%;
+  top: 30%;
+  animation-duration: 10s;
+}
+
+/* 中間海浪 - 中灰色 */
+.wave-middle {
+  background-color: #464545;
+  height: 110%;
+  top: 35%;
+  animation-duration: 8s;
+}
+
+/* 最前方的谷型海浪 - 右高左高，中間低 */
+.wave-valley {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  top: 20%;
+  left: 0;
+  background-color: #aaa;
+
+  animation: wave-valley-move 6s infinite ease-in-out;
+  clip-path: path(
+    "M 0 40 
+     Q 25 10, 50 40 
+     Q 75 70, 100 40 
+     L 100 100 L 0 100 Z"
+  ); /* 右高、左高，中間低的曲線 */
+}
+
+/* 底層 & 中間層波浪動畫 - 來回擺動 */
+@keyframes wave-move {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* 最前方的谷型波浪動畫 - 小幅移動 */
+@keyframes wave-valley-move {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-20%); } /* 只移動 20%，保持形狀 */
+  100% { transform: translateX(0%); }
 }
 /* //////////////////導航欄/////////////////////// */
 
@@ -125,7 +186,7 @@ body {
   top: 0;
   z-index: 1000;
   background-color: #4a4a4a;
-  height: 7vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
