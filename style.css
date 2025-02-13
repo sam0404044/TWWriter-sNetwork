@@ -1,11 +1,21 @@
 /* ///////////////////////////全域設定///////////////////////////////// */
-html{
-margin: 0;
-padding: 0;
-font-family: sans-serif;
-box-sizing: border-box;
-font-size: 2vw;
+html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  /* font-size: 2vw; */
 }
+
+hr {
+  display: block; /* 確保它顯示 */
+  visibility: visible;
+  opacity: 1;
+  height: 1px; /* 或其他適當高度 */
+  border: none;
+  background-color: black; /* 確保有顏色 */
+}
+
 
 @font-face {
   font-family: "Cubic_11";
@@ -23,23 +33,19 @@ body {
   font-size: 1rem;
 }
 
-
 /* //////////////////////.section0/////////////////////// */
-.section0{
-  height:  100vh; 
+.section0 {
+  height: 100vh;
   width: 100%;
 }
 
-
-
 .banner {
-   height: 50vh;
+  height: 50vh;
   text-align: center;
   line-height: 220px;
-   position: relative;
-  
-  transform-style: preserve-3d;
+  position: relative;
 
+  transform-style: preserve-3d;
 }
 .banner .slider {
   position: relative;
@@ -57,32 +63,30 @@ body {
   width: 70vh;
   top: 10%;
   left: 50%;
-  transform:translateX(-50%)
+  transform: translateX(-50%);
 }
-
 
 @keyframes autoRun {
   from {
-    transform: perspective(1000px)  rotateY(0deg);
+    transform: perspective(1000px) rotateY(0deg);
   }
   to {
-    transform: perspective(1000px)  rotateY(360deg);
+    transform: perspective(1000px) rotateY(360deg);
   }
 }
-
 
 .banner .slider .item {
   height: 200px;
   width: 150px;
   position: absolute;
   inset: 0 0 0 0;
-  transform: rotateY(calc((var(--position) - 1) * (360deg / var(--quantity)))) translateZ(300px);
+  transform: rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+    translateZ(300px);
 }
 .banner .slider .item img {
   width: 20%;
   height: 20%;
   object-fit: contain;
-
 }
 .bannerbox {
   display: flex;
@@ -92,11 +96,9 @@ body {
   height: 33vh;
 }
 
-
-
 .banner-title {
   position: relative;
- font-size: clamp(50px, 10vw, 150px);
+  font-size: clamp(50px, 10vw, 150px);
   color: aliceblue;
   font-weight: bolder;
   text-align: center;
@@ -167,19 +169,30 @@ body {
 
 /* 底層 & 中間層波浪動畫 - 來回擺動 */
 @keyframes wave-move {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 /* 最前方的谷型波浪動畫 - 小幅移動 */
 @keyframes wave-valley-move {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-20%); } /* 只移動 20%，保持形狀 */
-  100% { transform: translateX(0%); }
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-20%);
+  } /* 只移動 20%，保持形狀 */
+  100% {
+    transform: translateX(0%);
+  }
 }
 /* //////////////////導航欄/////////////////////// */
-
 
 .nav {
   position: sticky;
@@ -198,7 +211,6 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-
 }
 .nav ul li {
   margin: 0 15px;
@@ -215,24 +227,105 @@ body {
   border-radius: 5px;
 }
 
-/* //////////////////////section1: Gutcha 區塊///////////////// */ 
+/* //////////////////////section1: Gutcha 區塊///////////////// */
 
 .section1 {
-  display: grid;
-  height: 100vh; /* 占滿 70% 視窗高度 */
-  grid-template-columns:2FR 7FR 3FR  2FR
+  display: flex;
+  height: 60vh; /* 占滿 70% 視窗高度 */
+  margin:10vh 15vh;
+  padding: 10vh;
+  text-align: center;
+  align-items: center; /* 垂直置中 */
+  justify-content: center; /* 水平置中 (如果需要) */
+  /* border-radius: 30px; */
+  background-color: rgb(137, 137, 137,0.3);
+
 }
 
-.gutcha:nth-of-type(1) {
+.gatchaTextcontanier{
+  flex: 6;
+  height: 70vh
+  display: flex;
+  align-items: center; /* 內容水平置中 */
+  text-align: center; /* 文字置中 */
+  justify-content: center;
+  gap: 20px;
+  
+}
+
+.gatchaText {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 內容水平置中 */
+  text-align: center; /* 文字置中 */
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px; /* 水平置中 */
+  max-width: 500px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 陰影更細緻 */
+  
+}
+
+.gatchaText h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.gatchaText hr {
+  width: 80%;
+  margin: 10px auto; /* 增加 `hr` 間距 */
+  border: none;
+  height: 2px;
+  background-color: #000000; /* 紅色分隔線 */
+}
+
+.gatchaText p {
+  width: 80%;
+  font-size: 1px;
+  line-height: 1.6;
+  color: #333;
 
 }
 
-.gutcha:nth-of-type(2) {
-
-}
-
-.gutcha img {
+.button-container {
+  display: flex;
+  justify-content: center;
   width: 100%;
+}
+
+.gatchaText button {
+  background: linear-gradient(to bottom, #ff4d4d 0%, #b30000 50%, #b30000 100%);
+  color: white;
+  border: 2px solid white;
+  border-radius: 25px; /* 再扁一點 */
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 2px 3px rgba(139, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gatchaText button:hover {
+  background: linear-gradient(to bottom, #ff1a1a 0%, #800000 50%, #800000 100%);
+  box-shadow: 0 3px 5px rgba(139, 0, 0, 0.5);
+}
+
+
+
+.gatchaImg {
+  flex: 4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gatchaImg img {
+  width: 70%;
   height: 100%;
   object-fit: contain;
 }
@@ -278,4 +371,15 @@ body {
 .card p {
   color: #555;
   font-size: 1rem;
+}
+
+/* //////////////////////////////////rwd////////////////////////////// */
+@media (max-width: 768px) {
+  .banner-img {
+    position: absolute;
+    width: 30vh;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
