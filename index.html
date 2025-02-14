@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   </head>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
   <body>
     <!-- //////////////////////////////section0///////////////////////////////////////// -->
 
-    <div class="section0">
+    <div class="section0 fade-in">
       <div class="banner">
         <img class="banner-img" src="./img/actor.png" />
         <div class="slider" style="--quantity: 10">
@@ -64,50 +64,95 @@
     <nav id="navbar" class="nav">
       <ul>
         <li><a href="#">首頁</a></li>
+        <li><a href="#">文壇扭蛋</a></li>
         <li><a href="#">作家介紹</a></li>
         <li><a href="#">演講</a></li>
         <li><a href="#">作品</a></li>
       </ul>
     </nav>
     <!-- ///////////////////////////////////////////section1扭蛋機////////////////////////////////////////////////// -->
-    <div class="section1">
-       <div class="gatchaTextcontanier"> 
+    <div class="section1 fade-in">
+      <div class="gatchaTextcontanier">
         <div class="gatchaText">
           <div><h2>文壇扭蛋驚喜</h2></div>
-          <hr>
+          <hr />
           <div>
-            點擊「開始」按鈕，即刻啟動扭蛋體驗！每次抽取都會隨機選出一位作家，成為邀稿或演講合作的理想人選。這不僅是一次發現文學魅力的旅程，更是一個拓展合作機會的平台，讓你輕鬆找到具有獨特風格與深度的合作夥伴。
+            點擊「開始」按鈕，即刻啟動扭蛋體驗！每次抽取都會隨機選出一位作家，成為邀稿或演講合作的理想人選。讓你輕鬆找到具有獨特風格與深度的合作夥伴。
           </div>
-          <hr>
-          <div><button>開始</button></div>
+          <hr />
+          <div><button id="startButton">開始</button></div>
         </div>
       </div>
-        <div class="gatchaImg">
-           <img src="./img/gutcha.png" alt="扭蛋機" />
-        </div>
+
+      <!-- 這張圖卡開始時隱藏 -->
+      <div class="shiningCardContainerFlex">
+        <div class="shiningCardContainer">
+          <div class="profile-card shining">
+            <div class="card-header">
+              <img
+                src="img/photo/寺尾.jpg"
+                alt="人物照片"
+                class="profile-img"
+              />
+              <h2 class="profile-name">人物名稱</h2>
+            </div>
       
+            <!-- Email 按鈕 -->
+            <span class="email-icon" onclick="showEmail()">📧</span>
+      
+            <!-- Email 顯示區 -->
+            <div id="emailDisplay" class="email-display">person@example.com</div>
+      
+            <div class="card-body">
+              <p class="profile-description">
+                這裡是人物的簡介，可以放入相關背景、成就、興趣等資訊。
+                這張卡片的設計讓圖片、名稱和介紹清晰分區，視覺更有層次感。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ///////////////////////////扭蛋機///////////////////////////////// -->
+      <div class="gatchaImg">
+        <img src="./img/gutcha.png" alt="扭蛋機" />
+      </div>
     </div>
     <!-- ///////////////////////////////////////////section1////////////////////////////////////////////////// -->
+    <svg
+      width="100%"
+      height="150px"
+      viewBox="0 0 100 50"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+    <svg
+      class="section2wave"
+      width="100%"
+      height="60px"
+      viewBox="0 0 100 50"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,10 
+               Q 25,45 50,35 
+               Q 75,25 100,10 
+               L100,50 
+               L0,50 
+               Z"
+        fill="#000"
+      />
+    </svg>
+
     <div class="section2">
-      <div class="container">
-        <div class="card">
-          <img src="./img/photo/寺尾.jpg" alt="寺尾哲也" />
-          <h2>寺尾哲也</h2>
-          <p>
-            臺灣作家、工程師。作品常以天才的各種面向為出發。著有短篇小說集《子彈是餘生》
-          </p>
-        </div>
-        <div class="card">
-          <img src="./img/photo/寺尾.jpg" alt="講師B" />
-          <h2>講師B</h2>
-          <p>講師B的簡介文字。</p>
-        </div>
-        <div class="card">
-          <img src="./img/photo/寺尾.jpg" alt="講師C" />
-          <h2>講師C</h2>
-          <p>講師C的簡介文字。</p>
-        </div>
-      </div>
+
+      <div class="section2Title"><h2>作家名冊</h2></div>
+      <div class="section2cardlist"></div>
+      <div class="grid-container" id="gridContainer">
+       </div>  <!--Grid 容器  -->
+
+      
     </div>
   </body>
 </html>
