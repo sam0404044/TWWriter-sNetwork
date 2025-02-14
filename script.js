@@ -119,7 +119,6 @@ async function fetchSheetData() {
     console.error("❌ 發生錯誤:", error);
   }
 }
-
 // 🔹 主程式：等 `fetchSheetData()` 執行完再繼續
 async function main() {
   await fetchSheetData(); // 確保資料載入完畢
@@ -127,45 +126,50 @@ async function main() {
 
   // 🔹 這裡可以安全使用 `rows` 和 `columns`
   console.log("第一筆資料:", rows[0]); // 確保資料已載入
-}
-
-// 🔹 執行主程式
-main();
-
-///////////////////////////產生人物圖卡///////////////////////////////////
-
-document.addEventListener("DOMContentLoaded", () => {
   const gridContainer = document.getElementById("gridContainer");
-
   // 你可以替換這個資料，或用 fetch 來讀取 Google Sheets 資料
   const personData = {
-    name: `${rows?.[0]?.[1]}` || "未提供姓名",
+    name: rows?.[0]?.[1] || "未提供姓名",
     photo: "img/photo/寺尾.jpg",
     email: "person@example.com",
     description:
       "這裡是人物的簡介，可以放入相關背景、成就、興趣等資訊。這張卡片的設計讓圖片、名稱和介紹清晰分區，視覺更有層次感。",
   };
+  // 使用 `for` 迴圈來產生卡片
+  for (let i = 0; i < rows.length; i++) {
+    let name = rows[i][1]; // 第 i 行，第 1 列是名字
+    let photo = `./img/photo/${i}.jpg`; // 第 i 行，第 5 列是照片
+    let email = rows[i][2]; // 第 i 行，第 2 列是 Email
+    let description = rows[i][3]; // 第 i 行，第 3 列是簡介
 
-  // 動態創建卡片 HTML
-  const cardHTML = `
+    // 建立卡片 HTML
+    const cardHTML = `
         <div class="profile-card">
           <div class="card-header">
-            <img src="${personData.photo}" alt="人物照片" class="profile-img" />
-            <h2 class="profile-name">${personData.name}</h2>
+            <img src="${photo}" alt="${name}" class="profile-img" />
+            <h2 class="profile-name">${name}</h2>
           </div>
     
           <!-- Email 按鈕 -->
           <span class="email-icon" onclick="showEmail()">📧</span>
     
           <!-- Email 顯示區 -->
-          <div class="email-display">${personData.email}</div>
+          <div class="email-display">${email}</div>
     
           <div class="card-body">
-            <p class="profile-description">${personData.description}</p>
+            <p class="profile-description">${description}</p>
           </div>
         </div>
     `;
 
-  // 插入 grid-container
-  gridContainer.innerHTML += cardHTML;
-});
+    // 插入 grid-container
+    gridContainer.innerHTML += cardHTML;
+  }
+}
+// 🔹 執行主程式
+main();
+
+///////////////////////////產生人物圖卡///////////////////////////////////
+// document.addEventListener("DOMContentLoaded", () => {
+
+// });
