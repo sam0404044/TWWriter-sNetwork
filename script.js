@@ -162,6 +162,8 @@ async function main() {
         </div>
     `;
 
+    ////隨機打亂////
+    // card.style.order = Math.floor(Math.random() * people.length);
     // 插入 grid-container
     gridContainer.innerHTML += cardHTML;
   }

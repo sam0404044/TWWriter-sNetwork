@@ -367,6 +367,10 @@ body {
   }
 }
 
+.profile-card:hover {
+  transform: scale(1.05);
+}
+
 /* //////////////////////////////////Section2: 卡片區塊///////////////// */
 .section2 {
   height: auto;
@@ -500,5 +504,10 @@ body {
     top: 10%;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  .banner-title {
+    -webkit-text-stroke: 0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 陰影稍微縮小 */
   }
 }
