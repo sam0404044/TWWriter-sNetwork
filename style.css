@@ -216,6 +216,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 .nav ul {
   list-style: none;
@@ -230,7 +231,7 @@ body {
 }
 .nav ul li a {
   text-decoration: none;
-  color: white;
+  color: aliceblue;
   font-size: 18px;
   padding: 8px 15px;
   display: block;
@@ -310,8 +311,8 @@ body {
 
 .gatchaText button {
   background: linear-gradient(to bottom, #ff4d4d 0%, #b30000 50%, #b30000 100%);
-  color: white;
-  border: 2px solid white;
+  color: aliceblue;
+  border: 2px solid aliceblue;
   border-radius: 25px; /* 再扁一點 */
   padding: 10px 30px;
   font-size: 16px;
@@ -322,7 +323,26 @@ body {
   z-index: 1000;
 }
 
+.shiningCardContainerFlex button {
+  background: linear-gradient(to bottom, #ff4d4d 0%, #b30000 50%, #b30000 100%);
+  color: aliceblue;
+  border: 2px solid aliceblue;
+  border-radius: 25px; /* 再扁一點 */
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 2px 3px rgba(139, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  margin-top: 40px;
+}
 .gatchaText button:hover {
+  background: linear-gradient(to bottom, #ff1a1a 0%, #800000 50%, #800000 100%);
+  box-shadow: 0 3px 5px rgba(139, 0, 0, 0.5);
+}
+
+.shiningCardContainerFlex button:hover {
   background: linear-gradient(to bottom, #ff1a1a 0%, #800000 50%, #800000 100%);
   box-shadow: 0 3px 5px rgba(139, 0, 0, 0.5);
 }
@@ -347,6 +367,7 @@ body {
   display: none; /* 初始隱藏 */
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .shiningCardContainer {
   justify-content: center;
@@ -355,7 +376,18 @@ body {
 
 .profile-card.shining {
   box-shadow: 0 0 20px 5px rgba(255, 223, 0, 0.8);
-  animation: glow 1.5s infinite alternate;
+  animation: glow 1.5s infinite alternate, scaleUp 0.7s ease-out forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes glow {
@@ -384,10 +416,10 @@ body {
   font-size: 3vw; /* 調整字體大小 */
   margin-left: 10vh; /* 左側間距 */
   margin-bottom: 5vh; /* 下方間距 */
-  border-left: 5px solid white; /* 右邊 5px 白色線條 */
+  border-left: 5px solid aliceblue; /* 右邊 5px 白色線條 */
   padding-left: 15px; /* 讓文字不緊貼右邊框 */
   display: inline-block; /* 避免邊框影響整個區塊 */
-  color: white; /* 讓文字跟邊線搭配 */
+  color: aliceblue; /* 讓文字跟邊線搭配 */
 }
 
 /* Grid 佈局（每列 3 張） */
@@ -409,7 +441,7 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 740px) {
   .grid-container {
     grid-template-columns: repeat(1, 1fr); /* 手機：1 張 */
   }
@@ -419,7 +451,7 @@ body {
 /* 卡片容器 */
 .profile-card {
   width: 320px;
-  background: white;
+  background: aliceblue;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -496,12 +528,14 @@ body {
   line-height: 1.5;
 }
 
+/* ///////////////////////////////////////////////////////////////////////// */
+
 /* //////////////////////////////////rwd////////////////////////////// */
 @media (max-width: 768px) {
   .banner-img {
     position: absolute;
-    width: 30vh;
-    top: 10%;
+    width: 50vh;
+    top: 35%;
     left: 50%;
     transform: translateX(-50%);
   }

@@ -20,14 +20,38 @@ document.addEventListener("DOMContentLoaded", () => {
 ///////////////////////////////扭蛋抽卡//////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
+  const retryButton = document.getElementById("retryButton");
+  const gridContainer = document.getElementById("gridContainer");
+
+  function getRandomCard() {
+    const cards = gridContainer.children;
+    if (cards.length === 0)
+      return "<div class='profile-card shining'>❌ 沒有可用的卡片</div>";
+    const randomIndex = Math.floor(Math.random() * cards.length);
+    return `<div class='profile-card shining'>${cards[randomIndex].innerHTML}</div>`;
+  }
+
   if (startButton) {
     startButton.addEventListener("click", function () {
-      // 隱藏 gatchaTextcontanier
       console.log("按鈕正常運作");
       document.querySelector(".gatchaTextcontanier").style.display = "none";
-      // 顯示光芒卡片
-      document.querySelector(".shiningCardContainerFlex").style.display =
-        "flex";
+
+      let cardContainer = document.querySelector(".shiningCardContainerFlex");
+      cardContainer.innerHTML = `
+          <div id="selectedCardContainer">
+            ${getRandomCard()}
+          </div>
+          <div><button id="retryButton">再抽一次</button></div>
+        `;
+      cardContainer.style.display = "flex";
+
+      document
+        .getElementById("retryButton")
+        .addEventListener("click", function () {
+          console.log("再抽一次");
+          document.getElementById("selectedCardContainer").innerHTML =
+            getRandomCard();
+        });
     });
   } else {
     console.error("❌ startButton 找不到，請檢查 HTML 是否正確！");
@@ -121,57 +145,82 @@ async function fetchSheetData() {
 }
 // 🔹 主程式：等 `fetchSheetData()` 執行完再繼續
 async function main() {
-  await fetchSheetData(); // 確保資料載入完畢
-  console.log("🚀 程式繼續執行...");
+  await fetchSheetData(); // 先抓取 Google Sheets 資料
+  console.log("🚀 資料載入完成...");
 
-  // 🔹 這裡可以安全使用 `rows` 和 `columns`
-  console.log("第一筆資料:", rows[0]); // 確保資料已載入
   const gridContainer = document.getElementById("gridContainer");
-  // 你可以替換這個資料，或用 fetch 來讀取 Google Sheets 資料
-  const personData = {
-    name: rows?.[0]?.[1] || "未提供姓名",
-    photo: "img/photo/寺尾.jpg",
-    email: "person@example.com",
-    description:
-      "這裡是人物的簡介，可以放入相關背景、成就、興趣等資訊。這張卡片的設計讓圖片、名稱和介紹清晰分區，視覺更有層次感。",
-  };
-  // 使用 `for` 迴圈來產生卡片
+  let cardHTML = ""; // 先用變數儲存 HTML，提高效能
+
+  // 產生卡片
   for (let i = 0; i < rows.length; i++) {
-    let name = rows[i][1]; // 第 i 行，第 1 列是名字
-    let photo = `./img/photo/${i}.jpg`; // 第 i 行，第 5 列是照片
-    let email = rows[i][2]; // 第 i 行，第 2 列是 Email
-    let description = rows[i][3]; // 第 i 行，第 3 列是簡介
+    let name = rows[i][1] || "未提供姓名";
+    let photo = `./img/photo/${i}.jpg`;
+    let email = rows[i][2] || "未提供 Email";
+    let description = rows[i][3] || "沒有提供簡介";
 
     // 建立卡片 HTML
-    const cardHTML = `
-        <div class="profile-card">
-          <div class="card-header">
-            <img src="${photo}" alt="${name}" class="profile-img" />
-            <h2 class="profile-name">${name}</h2>
+    cardHTML += `
+          <div class="profile-card grid-item">
+            <div class="card-header">
+              <img src="${photo}" alt="${name}" class="profile-img" />
+              <h2 class="profile-name">${name}</h2>
+            </div>
+      
+            <!-- Email 按鈕 -->
+            <span class="email-icon" onclick="showEmail()">📧</span>
+      
+            <!-- Email 顯示區 -->
+            <div class="email-display">${email}</div>
+      
+            <div class="card-body">
+              <p class="profile-description">${description}</p>
+            </div>
           </div>
-    
-          <!-- Email 按鈕 -->
-          <span class="email-icon" onclick="showEmail()">📧</span>
-    
-          <!-- Email 顯示區 -->
-          <div class="email-display">${email}</div>
-    
-          <div class="card-body">
-            <p class="profile-description">${description}</p>
-          </div>
-        </div>
-    `;
-
-    ////隨機打亂////
-    // card.style.order = Math.floor(Math.random() * people.length);
-    // 插入 grid-container
-    gridContainer.innerHTML += cardHTML;
+      `;
   }
+
+  // **一次性插入所有卡片，提高效能**
+  gridContainer.innerHTML = cardHTML;
+
+  // **等待卡片載入後，才隨機設定 order**
+  const gridItems = document.querySelectorAll(".grid-item");
+  gridItems.forEach((item) => {
+    item.style.order = Math.floor(Math.random() * gridItems.length);
+  });
 }
-// 🔹 執行主程式
+
+// **執行主程式**
 main();
 
-///////////////////////////產生人物圖卡///////////////////////////////////
-// document.addEventListener("DOMContentLoaded", () => {
+///////////////////////////抽卡///////////////////////////////////
+document.getElementById("startButton").addEventListener("click", () => {
+  const gridContainer = document.getElementById("gridContainer");
 
-// });
+  // 🔹 確保 `grid-container` 已經有內容
+  if (!gridContainer.innerHTML.trim()) {
+    alert("❌ 目前沒有可抽的卡片，請先載入 Grid！");
+    return;
+  }
+
+  // **重新選取 `.grid-item`（確保抓到最新的卡片）**
+  const gridItems = document.querySelectorAll(".grid-item");
+  if (gridItems.length === 0) {
+    alert("❌ 沒有可抽的卡片！");
+    return;
+  }
+
+  // **隨機選取一張卡片**
+  const randomIndex = Math.floor(Math.random() * gridItems.length);
+  const selectedCard = gridItems[randomIndex];
+
+  // **複製卡片（保持原本的卡片不變）**
+  const clonedCard = selectedCard.cloneNode(true);
+  clonedCard.style.background = "lightgoldenrodyellow"; // 改變顏色標示
+  clonedCard.style.transform = "scale(1.1)"; // 放大一點讓它突出
+  clonedCard.classList.add("shining"); // 🔹 添加 `.shining` class 來標示這張卡片
+
+  // **插入到 "selected-card-container"**
+  const selectedContainer = document.getElementById("selectedCardContainer");
+  selectedContainer.innerHTML = ""; // 清空舊卡片
+  selectedContainer.appendChild(clonedCard);
+});

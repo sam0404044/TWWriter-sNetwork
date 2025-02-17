@@ -86,31 +86,10 @@
 
       <!-- 這張圖卡開始時隱藏 -->
       <div class="shiningCardContainerFlex">
-        <div class="shiningCardContainer">
-          <div class="profile-card shining">
-            <div class="card-header">
-              <img
-                src="img/photo/寺尾.jpg"
-                alt="人物照片"
-                class="profile-img"
-              />
-              <h2 class="profile-name">人物名稱</h2>
-            </div>
-      
-            <!-- Email 按鈕 -->
-            <span class="email-icon" onclick="showEmail()">📧</span>
-      
-            <!-- Email 顯示區 -->
-            <div id="emailDisplay" class="email-display">person@example.com</div>
-      
-            <div class="card-body">
-              <p class="profile-description">
-                這裡是人物的簡介，可以放入相關背景、成就、興趣等資訊。
-                這張卡片的設計讓圖片、名稱和介紹清晰分區，視覺更有層次感。
-              </p>
-            </div>
-          </div>
+        <div id="selectedCardContainer">
+       
         </div>
+        <div><button id="retryButton">再抽一次</button></div>
       </div>
 
       <!-- ///////////////////////////扭蛋機///////////////////////////////// -->
@@ -150,7 +129,7 @@
       <div class="section2Title"><h2>作家名冊</h2></div>
       <div class="section2cardlist"></div>
       <div class="grid-container" id="gridContainer">
-       </div>  <!--Grid 容器  -->
+       </div>  <!--Grid 容器-->
       
     </div>
   </body>
