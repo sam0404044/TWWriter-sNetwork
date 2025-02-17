@@ -376,6 +376,7 @@ body {
 
 .profile-card.shining {
   box-shadow: 0 0 20px 5px rgba(255, 223, 0, 0.8);
+  background-color: #f8f4a5;
   animation: glow 1.5s infinite alternate, scaleUp 0.7s ease-out forwards;
 }
 
@@ -529,13 +530,15 @@ body {
 }
 
 /* ///////////////////////////////////////////////////////////////////////// */
-
+.footer img {
+  width: 1vh;
+}
 /* //////////////////////////////////rwd////////////////////////////// */
 @media (max-width: 768px) {
   .banner-img {
+    top: 35%;
     position: absolute;
     width: 50vh;
-    top: 35%;
     left: 50%;
     transform: translateX(-50%);
   }
