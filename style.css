@@ -406,9 +406,13 @@ body {
 
 /* //////////////////////////////////Section2: 卡片區塊///////////////// */
 .section2 {
+  position: relative;
   height: auto;
   background-color: #000000;
   margin-top: -6px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 .section2wave {
 }
@@ -421,6 +425,7 @@ body {
   padding-left: 15px; /* 讓文字不緊貼右邊框 */
   display: inline-block; /* 避免邊框影響整個區塊 */
   color: aliceblue; /* 讓文字跟邊線搭配 */
+  z-index: 2;
 }
 
 /* Grid 佈局（每列 3 張） */
@@ -433,6 +438,7 @@ body {
   padding: 20px;
   align-items: start;
   justify-content: center;
+  z-index: 2;
 }
 
 /* 🔹 RWD 響應式設計 */
@@ -447,6 +453,35 @@ body {
     grid-template-columns: repeat(1, 1fr); /* 手機：1 張 */
   }
 }
+/* ///////////////////////////////背景字///////////////////////////////// */
+
+.animated-text-A {
+  position: absolute;
+  height: 200%;
+ bottom: 0;
+ left: 50%;
+ transform: translateX(-50%);
+z-index: 0;
+  font-size: 24px;
+  color: white;
+  padding: 10px;
+  writing-mode: vertical-rl; /* 讓文字變成直排 */
+  text-orientation: upright; /* 保持字體正立 */
+  letter-spacing: 5px; /* 增加字距 */
+  line-height: 2;
+    animation: fadeResizeMove 10s infinite ease-in-out;
+}
+
+
+
+@keyframes fadeResizeMove {
+  0%   { opacity: 0.01; transform: translateY(0) translateX(-50%); z-index: 0;}
+
+  50%  { opacity: 0.1; }
+  
+  100% { opacity: 0.01; transform: translateY(30%) translateX(-50%); z-index: 0;}
+}
+
 
 /* /////////////////////////////card/////////////////////////// */
 /* 卡片容器 */
@@ -530,8 +565,61 @@ body {
 }
 
 /* ///////////////////////////////////////////////////////////////////////// */
-.footer img {
-  width: 1vh;
+/* Footer 樣式 */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 內容容器 */
+.footer-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Logo */
+.footer-logo img {
+  height: 50px;
+}
+
+/* 公司簡介 */
+.footer-description {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* Email */
+.footer-email a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+/* 社群媒體連結 */
+.footer-social {
+  margin: 10px 0;
+}
+
+.footer-social a {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.footer-social img {
+  width: 24px;
+  height: 24px;
+  transition: opacity 0.3s;
+}
+
+.footer-social a:hover img {
+  opacity: 0.7;
+}
+
+/* 版權聲明 */
+.footer-copyright {
+  font-size: 12px;
+  margin-top: 10px;
 }
 /* //////////////////////////////////rwd////////////////////////////// */
 @media (max-width: 768px) {
