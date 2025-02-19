@@ -66,7 +66,7 @@
         <li><a href="#">首頁</a></li>
         <li><a href="#">文壇扭蛋</a></li>
         <li><a href="#">作家介紹</a></li>
-        <li><a href="#">演講</a></li>
+        <li><a href="#">居住區域</a></li>
         <li><a href="#">作品</a></li>
       </ul>
     </nav>
@@ -122,9 +122,9 @@
       />
     </svg>
     <!-- ///////////////////////////////////////section2///////////////////////////////////////// -->
-    <div class="section2 .fade-in">
-      <div class="section2Title"><h2>作家名冊</h2></div>
-      <div class="section2cardlist"></div>
+    <div class="section2">
+      <div class="section2Title fade-in"><h2>作家名冊</h2></div>
+      <div class="section2cardlist fade-in"></div>
       <div class="animated-text-A">
         那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。
         經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。
@@ -313,18 +313,59 @@
       <!--Grid 容器-->
     </div>
 
+    <svg
+      class="section2wave"
+      width="100%"
+      height="60px"
+      viewBox="0 0 100 50"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,40 
+       Q 25,5 50,15 
+       Q 75,25 100,40 
+       L100,0 
+       L0,0 
+       Z"
+        fill="#000"
+      />
+    </svg>
+
     <!-- ////////////////////////////////////////////section3地圖////////////////////////////////////////////////// -->
     <section class="section3">
-      <div class="map-card"></div>
+      <div class="map-card">
+        <div class="section3Title">
+          <h1>居住地區</h1>
+          <p>點選臺灣地圖，選擇居住區域</p>
+        </div>
+        <div
+          class="section3gridContainerNorth"
+          id="section3gridContainerNorth"
+        ></div>
+        <div
+          class="section3gridContainerCentral"
+          id="section3gridContainerCentral"
+        ></div>
+        <div
+          class="section3gridContainerSouth"
+          id="section3gridContainerSouth"
+        ></div>
+        <div
+          class="section3gridContainerEast"
+          id="section3gridContainerEast"
+        ></div>
+      </div>
+      <!-- ///////////////////////////////////////右側地圖/////////////////////////////////// -->
       <div class="map-container">
         <div class="map-flex-container">
-          <div class="North"></div>
+          <div class="North" id="North"></div>
           <div class="mapflexbox">
             <div class="mapflexbox2">
-              <div class="Central"></div>
-              <div class="South"></div>
+              <div class="Central" id="Central"></div>
+              <div class="South" id="South"></div>
             </div>
-            <div class="East"></div>
+            <div class="East" id="East"></div>
           </div>
         </div>
         <img src="./img/MAP/twmap.png" alt="" />

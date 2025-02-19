@@ -143,53 +143,159 @@ async function fetchSheetData() {
     console.error("❌ 發生錯誤:", error);
   }
 }
-// 🔹 主程式：等 `fetchSheetData()` 執行完再繼續
+/////////////////////////////////卡片相關///////////////////////////////////////////
 async function main() {
   await fetchSheetData(); // 先抓取 Google Sheets 資料
   console.log("🚀 資料載入完成...");
 
+  // 取得主要卡片容器
   const gridContainer = document.getElementById("gridContainer");
-  let cardHTML = ""; // 先用變數儲存 HTML，提高效能
 
-  // 產生卡片
+  // 取得各區域的展示容器 (請確保 HTML 中有這些 id)
+  const section3gridContainerNorth = document.getElementById(
+    "section3gridContainerNorth"
+  );
+  const section3gridContainerCentral = document.getElementById(
+    "section3gridContainerCentral"
+  );
+  const section3gridContainerSouth = document.getElementById(
+    "section3gridContainerSouth"
+  );
+  const section3gridContainerEast = document.getElementById(
+    "section3gridContainerEast"
+  );
+
+  // 用來累積所有卡片以及各區域卡片的 HTML
+  let cardHTML = "";
+  let cardHTMLNorth = "";
+  let cardHTMLCentral = "";
+  let cardHTMLSouth = "";
+  let cardHTMLEast = "";
+
   for (let i = 0; i < rows.length; i++) {
     let name = rows[i][1] || "未提供姓名";
     let photo = `./img/photo/${i}.jpg`;
     let email = rows[i][2] || "未提供 Email";
     let description = rows[i][3] || "沒有提供簡介";
+    let location = rows[i][4] != null ? rows[i][4].toString() : "";
 
-    // 建立卡片 HTML
-    cardHTML += `
-          <div class="profile-card grid-item">
-            <div class="card-header">
-              <img src="${photo}" alt="${name}" class="profile-img" />
-              <h2 class="profile-name">${name}</h2>
-            </div>
-      
-            <!-- Email 按鈕 -->
-            <span class="email-icon" onclick="showEmail()">📧</span>
-      
-            <!-- Email 顯示區 -->
-            <div class="email-display">${email}</div>
-      
-            <div class="card-body">
-              <p class="profile-description">${description}</p>
-            </div>
+    // 單筆卡片 HTML
+    let thisCardHTML = `
+        <div class="profile-card grid-item">
+          <div class="card-header">
+            <img src="${photo}" alt="${name}" class="profile-img" />
+            <h2 class="profile-name">${name}</h2>
           </div>
+          <!-- Email 按鈕 -->
+          <span class="email-icon" onclick="showEmail(event)">📧</span>
+          <!-- Email 顯示區 -->
+          <div class="email-display">${email}</div>
+          <div class="card-body">
+            <p class="profile-description">${description}</p>
+          </div>
+        </div>
       `;
+
+    // 累積所有卡片
+    cardHTML += thisCardHTML;
+
+    // 根據 location 判斷累積卡片
+    if (location.includes("北部")) {
+      cardHTMLNorth += thisCardHTML;
+      console.log("北部卡片已產生：", name);
+    }
+    if (location.includes("中部")) {
+      cardHTMLCentral += thisCardHTML;
+      console.log("中部卡片已產生：", name);
+    }
+    if (location.includes("南部")) {
+      cardHTMLSouth += thisCardHTML;
+      console.log("南部卡片已產生：", name);
+    }
+    if (location.includes("東部")) {
+      cardHTMLEast += thisCardHTML;
+      console.log("東部卡片已產生：", name);
+    }
   }
 
-  // **一次性插入所有卡片，提高效能**
+  // 將所有卡片插入到主要容器中
   gridContainer.innerHTML = cardHTML;
 
-  // **等待卡片載入後，才隨機設定 order**
+  // 點擊北部區塊時，顯示北部卡片，並清空其他區域
+  document.getElementById("North").addEventListener("click", () => {
+    console.log("North 區塊被點擊");
+    // 清空其他區域
+    section3gridContainerCentral.innerHTML = "";
+    section3gridContainerSouth.innerHTML = "";
+    section3gridContainerEast.innerHTML = "";
+    // 顯示北部卡片
+    if (cardHTMLNorth) {
+      console.log("顯示北部卡片，內容：", cardHTMLNorth);
+      section3gridContainerNorth.innerHTML = cardHTMLNorth;
+    } else {
+      console.log("沒有北部的卡片可顯示");
+      section3gridContainerNorth.innerHTML = "<p>無北部卡片</p>";
+    }
+  });
+
+  // 點擊中部區塊時，顯示中部卡片，並清空其他區域
+  document.getElementById("Central").addEventListener("click", () => {
+    console.log("Central 區塊被點擊");
+    // 清空其他區域
+    section3gridContainerNorth.innerHTML = "";
+    section3gridContainerSouth.innerHTML = "";
+    section3gridContainerEast.innerHTML = "";
+    // 顯示中部卡片
+    if (cardHTMLCentral) {
+      console.log("顯示中部卡片，內容：", cardHTMLCentral);
+      section3gridContainerCentral.innerHTML = cardHTMLCentral;
+    } else {
+      console.log("沒有中部的卡片可顯示");
+      section3gridContainerCentral.innerHTML = "<p>無中部卡片</p>";
+    }
+  });
+
+  // 點擊南部區塊時，顯示南部卡片，並清空其他區域
+  document.getElementById("South").addEventListener("click", () => {
+    console.log("South 區塊被點擊");
+    // 清空其他區域
+    section3gridContainerNorth.innerHTML = "";
+    section3gridContainerCentral.innerHTML = "";
+    section3gridContainerEast.innerHTML = "";
+    // 顯示南部卡片
+    if (cardHTMLSouth) {
+      console.log("顯示南部卡片，內容：", cardHTMLSouth);
+      section3gridContainerSouth.innerHTML = cardHTMLSouth;
+    } else {
+      console.log("沒有南部的卡片可顯示");
+      section3gridContainerSouth.innerHTML = "<p>無南部卡片</p>";
+    }
+  });
+
+  // 點擊東部區塊時，顯示東部卡片，並清空其他區域
+  document.getElementById("East").addEventListener("click", () => {
+    console.log("East 區塊被點擊");
+    // 清空其他區域
+    section3gridContainerNorth.innerHTML = "";
+    section3gridContainerCentral.innerHTML = "";
+    section3gridContainerSouth.innerHTML = "";
+    // 顯示東部卡片
+    if (cardHTMLEast) {
+      console.log("顯示東部卡片，內容：", cardHTMLEast);
+      section3gridContainerEast.innerHTML = cardHTMLEast;
+    } else {
+      console.log("沒有東部的卡片可顯示");
+      section3gridContainerEast.innerHTML = "<p>暫無東部作家</p>";
+    }
+  });
+
+  // 可選：設定所有 grid-item 的隨機 order
   const gridItems = document.querySelectorAll(".grid-item");
   gridItems.forEach((item) => {
     item.style.order = Math.floor(Math.random() * gridItems.length);
   });
 }
 
-// **執行主程式**
 main();
 
 ///////////////////////////抽卡///////////////////////////////////

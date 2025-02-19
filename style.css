@@ -419,8 +419,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-.section2wave {
-}
 
 .section2Title {
   font-size: 3vw; /* 調整字體大小 */
@@ -499,6 +497,7 @@ body {
 /* 卡片容器 */
 .profile-card {
   width: 320px;
+  height: 100%;
   background: aliceblue;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -576,18 +575,90 @@ body {
   line-height: 1.5;
 }
 /* /////////////////////////////section3/////////////////////////// */
+
 .section3 {
-  display: grid;
-  grid-template-columns: 6fr 3fr; /* 6:3 佈局 */
+  display: flex;
   gap: 10px;
   width: 100%; /* 控制區塊寬度 */
 
   /*overflow: auto;*/
   position: relative;
-  height: 300vh;
-  padding: 10vh;
+  height: auto;
+  /* margin-left: 10vh; 左側間距 */
+  margin-bottom: 10vh;
+}
+
+.map-card {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  margin: 0 10vh;
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  border-radius: 3vh;
+  padding: 20px;
+}
+
+.section3gridContainerNorth {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 大螢幕一排兩張卡 */
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .section3gridContainerNorth {
+    grid-template-columns: 1fr; /* 小螢幕一排一張卡 */
+  }
+}
+.section3gridContainerCentral {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 大螢幕一排兩張卡 */
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .section3gridContainerCentral {
+    grid-template-columns: 1fr; /* 小螢幕一排一張卡 */
+  }
+}
+.section3gridContainerSouth {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 大螢幕一排兩張卡 */
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .section3gridContainerSouth {
+    grid-template-columns: 1fr; /* 小螢幕一排一張卡 */
+  }
+}
+.section3gridContainerEast {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 大螢幕一排兩張卡 */
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .section3gridContainerEast {
+    grid-template-columns: 1fr; /* 小螢幕一排一張卡 */
+  }
+}
+
+.section3Title {
+  font-size: 3vw; /* 調整字體大小 */
+  margin-left: 10vh; /* 左側間距 */
+  margin-bottom: 5vh; /* 下方間距 */
+  border-left: 5px solid rgb(0, 0, 0); /* 右邊 5px 白色線條 */
+  padding-left: 15px; /* 讓文字不緊貼右邊框 */
+  display: inline-block; /* 避免邊框影響整個區塊 */
+  color: rgb(0, 0, 0); /* 讓文字跟邊線搭配 */
+  z-index: 2;
+}
+
+.section3Title p {
+  font-size: 2vw;
 }
 .map-container {
+  flex: 1;
   width: 200px;
   height: 380px;
   margin-left: auto;
@@ -613,22 +684,22 @@ body {
 }
 
 /* 當 .map-container 內的 .North 被 hover，顯示 北.png */
-.map-container:has(.North:hover) img[src*="北.png"] {
+.map-container:has(.North:hover) img[src$="北.png"] {
   opacity: 1;
 }
 
 /* 當 .map-container 內的 .Central 被 hover，顯示 中.png */
-.map-container:has(.Central:hover) img[src*="中.png"] {
+.map-container:has(.Central:hover) img[src$="中.png"] {
   opacity: 1;
 }
 
 /* 當 .map-container 內的 .South 被 hover，顯示 南.png */
-.map-container:has(.South:hover) img[src*="南.png"] {
+.map-container:has(.South:hover) img[src$="南.png"] {
   opacity: 1;
 }
 
 /* 當 .map-container 內的 .East 被 hover，顯示 東.png */
-.map-container:has(.East:hover) img[src*="東.png"] {
+.map-container:has(.East:hover) img[src$="東.png"] {
   opacity: 1;
 }
 
@@ -644,13 +715,15 @@ body {
 }
 
 .North {
-  flex: 1;
+  flex: 2;
   /* background-color: #007bff; */
+  opacity: 0.3;
 }
 
 .mapflexbox {
-  flex: 2;
+  flex: 7;
   display: flex;
+  opacity: 0.3;
 }
 
 .mapflexbox2 {
@@ -659,21 +732,26 @@ body {
   display: flex;
 }
 .Central {
-  flex: 1;
+  flex: 5;
+  /* background-color: #a9b02c; */
+  opacity: 0.3;
 }
 .South {
-  flex: 3;
-  /* background-color: #007bff; */
+  flex: 7;
+  /* background-color: #000000; */
+  opacity: 0.3;
 }
 .East {
-  flex: 2;
+  flex: 3;
+  /* background-color: #b20000; */
+  opacity: 0.3;
 }
 
 /* ///////////////////////////////////////////////////////////////////////// */
 /* Footer 樣式 */
 .footer {
   background-color: #333;
-  color: white;
+  color: aliceblue;
   padding: 20px;
   text-align: center;
 }
@@ -697,7 +775,7 @@ body {
 
 /* Email */
 .footer-email a {
-  color: #ddd;
+  color: aliceblue;
   text-decoration: none;
 }
 
