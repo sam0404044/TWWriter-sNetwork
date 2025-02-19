@@ -13,7 +13,12 @@ hr {
   opacity: 1;
   height: 1px; /* 或其他適當高度 */
   border: none;
-  background-color: black; /* 確保有顏色 */
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    /* 左邊完全透明 */ rgba(0, 0, 0, 1) 50%,
+    /* 中間黑色 */ rgba(0, 0, 0, 0) 100%
+  );
 }
 
 /* ////////////////////////////////////淡入////////////////////////// */
@@ -211,7 +216,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #4a4a4a;
+  background: linear-gradient(rgb(87, 87, 87), rgb(70, 70, 70));
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -237,7 +242,7 @@ body {
   display: block;
 }
 .nav ul li a:hover {
-  background-color: #555;
+  background-color: #898989;
   border-radius: 5px;
 }
 
@@ -458,30 +463,37 @@ body {
 .animated-text-A {
   position: absolute;
   height: 200%;
- bottom: 0;
- left: 50%;
- transform: translateX(-50%);
-z-index: 0;
-  font-size: 24px;
+  bottom: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  font-size: 1vw;
   color: white;
+
   padding: 10px;
   writing-mode: vertical-rl; /* 讓文字變成直排 */
   text-orientation: upright; /* 保持字體正立 */
   letter-spacing: 5px; /* 增加字距 */
   line-height: 2;
-    animation: fadeResizeMove 10s infinite ease-in-out;
+  pointer-events: none; /*禁止滑鼠事件*/
+  animation: fadeResizeMove 10s infinite linear;
 }
-
-
 
 @keyframes fadeResizeMove {
-  0%   { opacity: 0.01; transform: translateY(0) translateX(-50%); z-index: 0;}
+  0% {
+    opacity: 0.01;
+    transform: translateY(30%) translateX(-50%);
+  }
 
-  50%  { opacity: 0.1; }
-  
-  100% { opacity: 0.01; transform: translateY(30%) translateX(-50%); z-index: 0;}
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0.01;
+    transform: translateY(0%) translateX(-50%);
+  }
 }
-
 
 /* /////////////////////////////card/////////////////////////// */
 /* 卡片容器 */
@@ -562,6 +574,99 @@ z-index: 0;
   font-size: 0.9rem;
   color: #555;
   line-height: 1.5;
+}
+/* /////////////////////////////section3/////////////////////////// */
+.section3 {
+  display: grid;
+  grid-template-columns: 6fr 3fr; /* 6:3 佈局 */
+  gap: 10px;
+  width: 100%; /* 控制區塊寬度 */
+
+  /*overflow: auto;*/
+  position: relative;
+  height: 300vh;
+  padding: 10vh;
+}
+.map-container {
+  width: 200px;
+  height: 380px;
+  margin-left: auto;
+  top: 20vh;
+  position: sticky;
+  right: 20vh;
+  overflow: hidden;
+}
+
+.map-container img {
+  width: 200px;
+  height: auto;
+  object-fit: cover; /* 保持比例並填滿容器 */
+  position: absolute;
+  right: 0%;
+}
+
+.mapOpacity {
+  opacity: 0;
+  z-index: 1;
+  position: absolute; /* 確保圖片可以正確堆疊 */
+  transition: opacity 0.3s ease-in-out; /* 平滑顯示效果 */
+}
+
+/* 當 .map-container 內的 .North 被 hover，顯示 北.png */
+.map-container:has(.North:hover) img[src*="北.png"] {
+  opacity: 1;
+}
+
+/* 當 .map-container 內的 .Central 被 hover，顯示 中.png */
+.map-container:has(.Central:hover) img[src*="中.png"] {
+  opacity: 1;
+}
+
+/* 當 .map-container 內的 .South 被 hover，顯示 南.png */
+.map-container:has(.South:hover) img[src*="南.png"] {
+  opacity: 1;
+}
+
+/* 當 .map-container 內的 .East 被 hover，顯示 東.png */
+.map-container:has(.East:hover) img[src*="東.png"] {
+  opacity: 1;
+}
+
+/* ///////////////////////按鈕//////////////// */
+.map-flex-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: transparent;
+  position: absolute;
+}
+
+.North {
+  flex: 1;
+  /* background-color: #007bff; */
+}
+
+.mapflexbox {
+  flex: 2;
+  display: flex;
+}
+
+.mapflexbox2 {
+  flex: 3;
+  flex-direction: column;
+  display: flex;
+}
+.Central {
+  flex: 1;
+}
+.South {
+  flex: 3;
+  /* background-color: #007bff; */
+}
+.East {
+  flex: 2;
 }
 
 /* ///////////////////////////////////////////////////////////////////////// */
