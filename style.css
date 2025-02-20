@@ -106,6 +106,8 @@ body {
   height: 20%;
   object-fit: contain;
 }
+/* 其他 CSS 不變 */
+
 .bannerbox {
   display: flex;
   align-items: center;
@@ -467,6 +469,7 @@ body {
   z-index: 0;
   font-size: 1vw;
   color: white;
+  text-shadow: 0 0 5px aliceblue, 0 0 10px aliceblue, 0 0 15px aliceblue;
 
   padding: 10px;
   writing-mode: vertical-rl; /* 讓文字變成直排 */
