@@ -66,7 +66,7 @@
         <li><a href="#">首頁</a></li>
         <li><a href="#section1">文壇扭蛋</a></li>
         <li><a href="#section2">作家介紹</a></li>
-        <li><a href="#section3">居住區域</a></li>
+        <li class="rwd_none"><a href="#section3">居住區域</a></li>
       </ul>
     </nav>
     <!-- ///////////////////////////////////////////section1扭蛋機////////////////////////////////////////////////// -->
@@ -76,7 +76,10 @@
           <div><h2>文壇扭蛋驚喜</h2></div>
           <hr />
           <div>
-            點擊「開始」按鈕，即刻啟動扭蛋體驗！每次抽取都會隨機選出一位作家，成為邀稿或演講合作的理想人選。讓你輕鬆找到具有獨特風格與深度的合作夥伴。
+            <span>點擊「開始」按鈕，即刻啟動扭蛋體驗！</span
+            ><span class="rwd_none"
+              >每次抽取都會隨機選出一位作家。成為邀稿或演講合作的理想人選。讓你輕鬆找到具有獨特風格與深度的合作夥伴。</span
+            >
           </div>
           <hr />
           <div><button id="startButton">開始</button></div>
@@ -332,9 +335,9 @@
     </svg>
 
     <!-- ////////////////////////////////////////////section3地圖////////////////////////////////////////////////// -->
-    <section class="section3 fade-in" id="section3">
-      <div class="map-card" id="map-card">
-        <div class="section3Title">
+    <section class="section3 fade-in rwd_none" id="section3">
+      <div class="map-card rwd_none" id="map-card">
+        <div class="section3Title rwd_none">
           <h1>居住地區</h1>
           <p>點選臺灣地圖，選擇居住區域</p>
         </div>
@@ -356,7 +359,7 @@
         ></div>
       </div>
       <!-- ///////////////////////////////////////右側地圖/////////////////////////////////// -->
-      <div class="map-container">
+      <div class="map-container rwd_none">
         <div class="map-flex-container">
           <div class="North" id="North"></div>
           <div class="mapflexbox">

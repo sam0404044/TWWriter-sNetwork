@@ -248,6 +248,11 @@ body {
   border-radius: 5px;
 }
 
+@media (max-width: 768px) {
+  .rwd_none {
+    display: none !important;
+  }
+}
 /* //////////////////////section1: Gutcha 區塊///////////////// */
 
 .section1 {
