@@ -143,7 +143,7 @@ async function fetchSheetData() {
     console.error("❌ 發生錯誤:", error);
   }
 }
-/////////////////////////////////卡片相關///////////////////////////////////////////
+/////////////////////////////////區域相關///////////////////////////////////////////
 async function main() {
   await fetchSheetData(); // 先抓取 Google Sheets 資料
   console.log("🚀 資料載入完成...");
@@ -222,6 +222,8 @@ async function main() {
   gridContainer.innerHTML = cardHTML;
 
   // 點擊北部區塊時，顯示北部卡片，並清空其他區域
+
+  ////////////////////生菜老師說這邊可以抓父，用冒泡的方式抓/////////////////////////
   document.getElementById("North").addEventListener("click", () => {
     console.log("North 區塊被點擊");
     // 清空其他區域
@@ -288,6 +290,7 @@ async function main() {
       section3gridContainerEast.innerHTML = "<p>暫無東部作家</p>";
     }
   });
+  ////////////////////生菜老師說這邊可以抓父，用冒泡的方式抓/////////////////////////
 
   // 可選：設定所有 grid-item 的隨機 order
   const gridItems = document.querySelectorAll(".grid-item");
