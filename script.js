@@ -221,75 +221,45 @@ async function main() {
   // 將所有卡片插入到主要容器中
   gridContainer.innerHTML = cardHTML;
 
-  // 點擊北部區塊時，顯示北部卡片，並清空其他區域
-
   ////////////////////生菜老師說這邊可以抓父，用冒泡的方式抓/////////////////////////
-  document.getElementById("North").addEventListener("click", () => {
-    console.log("North 區塊被點擊");
-    // 清空其他區域
-    section3gridContainerCentral.innerHTML = "";
-    section3gridContainerSouth.innerHTML = "";
-    section3gridContainerEast.innerHTML = "";
-    // 顯示北部卡片
-    if (cardHTMLNorth) {
-      console.log("顯示北部卡片，內容：", cardHTMLNorth);
-      section3gridContainerNorth.innerHTML = cardHTMLNorth;
-    } else {
-      console.log("沒有北部的卡片可顯示");
-      section3gridContainerNorth.innerHTML = "<p>無北部卡片</p>";
-    }
-  });
+  document
+    .getElementById("map-container")
+    .addEventListener("click", (event) => {
+      const targetId = event.target.id;
 
-  // 點擊中部區塊時，顯示中部卡片，並清空其他區域
-  document.getElementById("Central").addEventListener("click", () => {
-    console.log("Central 區塊被點擊");
-    // 清空其他區域
-    section3gridContainerNorth.innerHTML = "";
-    section3gridContainerSouth.innerHTML = "";
-    section3gridContainerEast.innerHTML = "";
-    // 顯示中部卡片
-    if (cardHTMLCentral) {
-      console.log("顯示中部卡片，內容：", cardHTMLCentral);
-      section3gridContainerCentral.innerHTML = cardHTMLCentral;
-    } else {
-      console.log("沒有中部的卡片可顯示");
-      section3gridContainerCentral.innerHTML = "<p>無中部卡片</p>";
-    }
-  });
+      // 定義區域對應的卡片與容器
+      const regionMap = {
+        North: { container: section3gridContainerNorth, card: cardHTMLNorth },
+        Central: {
+          container: section3gridContainerCentral,
+          card: cardHTMLCentral,
+        },
+        South: { container: section3gridContainerSouth, card: cardHTMLSouth },
+        East: { container: section3gridContainerEast, card: cardHTMLEast },
+      };
 
-  // 點擊南部區塊時，顯示南部卡片，並清空其他區域
-  document.getElementById("South").addEventListener("click", () => {
-    console.log("South 區塊被點擊");
-    // 清空其他區域
-    section3gridContainerNorth.innerHTML = "";
-    section3gridContainerCentral.innerHTML = "";
-    section3gridContainerEast.innerHTML = "";
-    // 顯示南部卡片
-    if (cardHTMLSouth) {
-      console.log("顯示南部卡片，內容：", cardHTMLSouth);
-      section3gridContainerSouth.innerHTML = cardHTMLSouth;
-    } else {
-      console.log("沒有南部的卡片可顯示");
-      section3gridContainerSouth.innerHTML = "<p>無南部卡片</p>";
-    }
-  });
+      if (regionMap[targetId]) {
+        console.log(`${targetId} 區塊被點擊`);
 
-  // 點擊東部區塊時，顯示東部卡片，並清空其他區域
-  document.getElementById("East").addEventListener("click", () => {
-    console.log("East 區塊被點擊");
-    // 清空其他區域
-    section3gridContainerNorth.innerHTML = "";
-    section3gridContainerCentral.innerHTML = "";
-    section3gridContainerSouth.innerHTML = "";
-    // 顯示東部卡片
-    if (cardHTMLEast) {
-      console.log("顯示東部卡片，內容：", cardHTMLEast);
-      section3gridContainerEast.innerHTML = cardHTMLEast;
-    } else {
-      console.log("沒有東部的卡片可顯示");
-      section3gridContainerEast.innerHTML = "<p>暫無東部作家</p>";
-    }
-  });
+        // 清空所有區域的內容
+        Object.values(regionMap).forEach(({ container }) => {
+          container.innerHTML = "";
+        });
+
+        // 顯示對應區域的卡片
+        if (regionMap[targetId].card) {
+          console.log(
+            `顯示${targetId}區卡片，內容：`,
+            regionMap[targetId].card
+          );
+          regionMap[targetId].container.innerHTML = regionMap[targetId].card;
+        } else {
+          console.log(`沒有${targetId}的卡片可顯示`);
+          regionMap[targetId].container.innerHTML = `<p>無${targetId}卡片</p>`;
+        }
+      }
+    });
+
   ////////////////////生菜老師說這邊可以抓父，用冒泡的方式抓/////////////////////////
 
   // 可選：設定所有 grid-item 的隨機 order
@@ -333,3 +303,13 @@ document.getElementById("startButton").addEventListener("click", () => {
   selectedContainer.innerHTML = ""; // 清空舊卡片
   selectedContainer.appendChild(clonedCard);
 });
+///////////////////animateion///////////////////////////
+
+const textContent =
+  "那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。經過三四個小時才收網捕撈上船，生死之間，有些魚安逸的游彷彿網不存在；有些魚則擠著網子的孔縫，鱗破血流，牠們知道邊界就在那裡，但牠們就想鑽鑽看。在夢裡，有時我是漁夫、有時是魚，但更多時候我是海裡的泡沫碎屑。那是個多夢的夜晚，我夢到了遠方南美洲維克西尼海岸的漁民，三月到五月時便會開著非法拖網漁船盜獵，拖曳囊袋形網具沉到海底，網裡囊括近底層魚、蝦和軟體動物。";
+
+// 選取目標元素
+const textContainer = document.getElementById("text-container");
+
+// 設定內容
+textContainer.innerText = textContent.repeat(7);
