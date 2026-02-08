@@ -33,16 +33,6 @@ hr {
   transform: translateY(0);
 }
 
-/* //////////////////////////////////////////////////////////////////////// */
-@font-face {
-  font-family: "Cubic_11";
-  src: url("./font/Cubic_11.ttf") format("truetype");
-}
-
-div {
-  /* border: 5px black solid; */
-}
-
 body {
   margin: 0px;
   padding: 0px;
@@ -125,9 +115,6 @@ body {
 
   -webkit-text-stroke: 2px black;
   z-index: 2;
-}
-.bannerflex {
-  display: flex;
 }
 
 /* ///////////波浪容器設定///// ///*/
@@ -248,11 +235,6 @@ body {
   border-radius: 5px;
 }
 
-@media (max-width: 768px) {
-  .rwd_none {
-    display: none !important;
-  }
-}
 /* //////////////////////section1: Gutcha 區塊///////////////// */
 
 .section1 {
@@ -307,18 +289,10 @@ body {
 }
 
 .gatchaText p {
-  font-size: clamp(9px, 2vw, 20px);
-
+  font-size: clamp(0.9rem, 2vw, 1.25rem);
   width: 80%;
-  font-size: 1px;
   line-height: 1.6;
   color: #333;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
 }
 
 .gatchaText button {
@@ -380,10 +354,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-.shiningCardContainer {
-  justify-content: center;
-  align-items: center;
 }
 
 .profile-card.shining {
@@ -504,7 +474,8 @@ body {
 /* /////////////////////////////card/////////////////////////// */
 /* 卡片容器 */
 .profile-card {
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   height: 100%;
   background: aliceblue;
   border-radius: 12px;
@@ -606,49 +577,13 @@ body {
   padding: 20px;
 }
 
-.section3gridContainerNorth {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 大螢幕一排兩張卡 */
-  gap: 1rem;
-}
-
-@media (max-width: 768px) {
-  .section3gridContainerNorth {
-    grid-template-columns: 1fr; /* 小螢幕一排一張卡 */
-  }
-}
-.section3gridContainerCentral {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 大螢幕一排兩張卡 */
-  gap: 1rem;
-}
-
-@media (max-width: 768px) {
-  .section3gridContainerCentral {
-    grid-template-columns: 1fr; /* 小螢幕一排一張卡 */
-  }
-}
-.section3gridContainerSouth {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 大螢幕一排兩張卡 */
-  gap: 1rem;
-}
-
-@media (max-width: 768px) {
-  .section3gridContainerSouth {
-    grid-template-columns: 1fr; /* 小螢幕一排一張卡 */
-  }
-}
+.section3gridContainerNorth,
+.section3gridContainerCentral,
+.section3gridContainerSouth,
 .section3gridContainerEast {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 大螢幕一排兩張卡 */
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-}
-
-@media (max-width: 768px) {
-  .section3gridContainerEast {
-    grid-template-columns: 1fr; /* 小螢幕一排一張卡 */
-  }
 }
 
 .section3Title {
@@ -812,8 +747,12 @@ body {
   font-size: 12px;
   margin-top: 10px;
 }
-/* //////////////////////////////////rwd////////////////////////////// */
+/* //////////////////////////////////RWD 響應式////////////////////////////// */
 @media (max-width: 768px) {
+  .rwd_none {
+    display: none !important;
+  }
+
   .banner-img {
     top: 35%;
     position: absolute;
@@ -824,6 +763,133 @@ body {
 
   .banner-title {
     -webkit-text-stroke: 0;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* 陰影稍微縮小 */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  /* 導航：縮小間距與字體 */
+  .nav {
+    height: auto;
+    min-height: 10vh;
+    padding: 8px 0;
+  }
+  .nav ul li {
+    margin: 0 8px;
+  }
+  .nav ul li a {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  /* section1 扭蛋區：改為直向排列、縮小邊距 */
+  .section1 {
+    flex-direction: column;
+    margin: 8vh 2vh 4vh;
+    padding: 4vh 2vh;
+    height: auto;
+    min-height: 70vh;
+  }
+  .gatchaTextcontanier,
+  .gatchaImg {
+    flex: none;
+    width: 100%;
+  }
+  .gatchaTextcontanier {
+    height: auto;
+    min-height: auto;
+  }
+  .gatchaImg img {
+    width: 85%;
+    max-width: 280px;
+  }
+  .gatchaText {
+    margin: 10px;
+    padding: 16px;
+  }
+  .shiningCardContainerFlex {
+    flex: none;
+    width: 100%;
+  }
+  .shiningCardContainerFlex button {
+    margin-top: 20px;
+  }
+
+  /* section2 作家名冊：縮小邊距與標題 */
+  .section2Title {
+    margin-left: 2rem;
+    margin-bottom: 3vh;
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+  .grid-container {
+    margin: 0 1rem;
+    padding: 12px;
+    gap: 16px;
+  }
+
+  /* 背景裝飾字：避免過小 */
+  .animated-text-A {
+    font-size: clamp(8px, 2vw, 1vw);
+  }
+
+  /* section3 地圖區（大螢幕才顯示，此處備用） */
+  .section3gridContainerNorth,
+  .section3gridContainerCentral,
+  .section3gridContainerSouth,
+  .section3gridContainerEast {
+    grid-template-columns: 1fr;
+  }
+  .section3Title {
+    margin-left: 2rem;
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+  .section3Title p {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+  }
+
+  /* Footer */
+  .footer {
+    padding: 16px 12px;
+  }
+  .footer-container {
+    padding: 0 8px;
+  }
+  .footer-description {
+    font-size: 13px;
+  }
+  .footer-copyright {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-title {
+    font-size: clamp(28px, 10vw, 80px);
+  }
+  .banner .slider {
+    width: 80px;
+    height: 200px;
+    left: calc(50% - 40px);
+  }
+  .banner .slider .item {
+    height: 160px;
+    width: 120px;
+  }
+  .banner .slider .item img {
+    width: 24%;
+    height: 24%;
+  }
+  .nav ul li {
+    margin: 0 4px;
+  }
+  .nav ul li a {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+  .section1 {
+    margin: 6vh 1rem 3vh;
+    padding: 3vh 1rem;
+  }
+  .grid-container {
+    margin: 0 0.75rem;
+    padding: 8px;
   }
 }
